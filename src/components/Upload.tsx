@@ -35,7 +35,7 @@ const Upload: Component<Props> = (props) => {
                     $input.click()
                 }}
             >UPLOAD</button>
-            <input ref={$input} type="file" onChange={handleUpload} style={{ display: 'none' }} />
+            <input ref={$input} type="file" accept="image/*" onChange={handleUpload} style={{ display: 'none' }} />
         </>
     )
 }
