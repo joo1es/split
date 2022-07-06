@@ -3,14 +3,16 @@ import { createSignal } from 'solid-js'
 import Upload from './components/Upload'
 
 import styles from './App.module.css'
-import { variance, avarage } from './utils/variance'
+import { avarage } from './utils/math'
+import { split } from './utils/split'
 
 const App: Component = () => {
     const [data, setData] = createSignal<ImageData>()
     const [img, setImg] = createSignal('')
     const [splitImg, setSplitImg] = createSignal('')
     const [splitsSet, setSplitsSet] = createSignal<Set<number>>()
-    const [value, setValue] = createSignal('70')
+    const [value, setValue] = createSignal('80')
+    const [result, setResult] = createSignal<string[]>([])
     createEffect(() => {
         const imageData = data()
         setSplitImg('')
@@ -59,29 +61,58 @@ const App: Component = () => {
         <div class={styles.App}>
             {
                 !data() ? (
-                    <Upload
-                        onUpload={(data, img) => {
-                            setData(data)
-                            setImg(img)
-                        }}
-                    />
-                ) : (
                     <>
-                        <img class={styles.img} src={splitImg() || img()} />
-                        <div>
-                            <span>分割为 {(splitsSet()?.size || 0) + 1} 块</span>
-                            <input type="number" value={value()} onChange={(e) => {
-                                setValue((e.target as HTMLInputElement).value)
-                            }} />
+                        <div class={styles.title}>SPLIT</div>
+                        <Upload
+                            onUpload={(data, img) => {
+                                setData(data)
+                                setImg(img)
+                            }}
+                        />
+                    </>
+                ) : (
+                    result().length === 0 ? (
+                        <>
+                            <img class={styles.img} src={splitImg() || img()} />
+                            <div>
+                                <span>分割为 {(splitsSet()?.size || 0) + 1} 块</span>
+                                <input type="number" value={value()} onChange={(e) => {
+                                    setValue((e.target as HTMLInputElement).value)
+                                }} />
+                                <button
+                                    class={styles.button}
+                                    onClick={() => {
+                                        setData()
+                                        setImg('')
+                                    }}
+                                >重新上传</button>
+                                <button
+                                    onClick={async () => {
+                                        const dataValue = data()
+                                        const splits = splitsSet()
+                                        if (!dataValue || !splits) return
+                                        setResult(await split(dataValue, splits))
+                                    }}
+                                >完成</button>
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                            <div class={styles.result}>
+                                {
+                                    result().map(src => (
+                                        <img class={styles.previewImg} src={src} />
+                                    ))
+                                }
+                            </div>
                             <button
                                 class={styles.button}
                                 onClick={() => {
-                                    setData()
-                                    setImg('')
+                                    setResult([])
                                 }}
-                            >重新上传</button>
-                        </div>
-                    </>
+                            >返回</button>
+                        </>
+                    )
                 )
             }
         </div>
