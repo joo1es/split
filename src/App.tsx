@@ -75,8 +75,8 @@ const App: Component = () => {
                         <>
                             <img class={styles.img} src={splitImg() || img()} />
                             <div>
-                                <span>分割为 {(splitsSet()?.size || 0) + 1} 块</span>
-                                <input type="number" value={value()} onChange={(e) => {
+                                <span class={styles.description}>{(splitsSet()?.size || 0) + 1} cells</span>
+                                <input class={styles.input} type="number" value={value()} onChange={(e) => {
                                     setValue((e.target as HTMLInputElement).value)
                                 }} />
                                 <button
@@ -85,7 +85,7 @@ const App: Component = () => {
                                         setData()
                                         setImg('')
                                     }}
-                                >重新上传</button>
+                                >Re-Upload</button>
                                 <button
                                     onClick={async () => {
                                         const dataValue = data()
@@ -93,7 +93,7 @@ const App: Component = () => {
                                         if (!dataValue || !splits) return
                                         setResult(await split(dataValue, splits))
                                     }}
-                                >完成</button>
+                                >Split</button>
                             </div>
                         </>
                     ) : (
@@ -110,7 +110,7 @@ const App: Component = () => {
                                 onClick={() => {
                                     setResult([])
                                 }}
-                            >返回</button>
+                            >Back</button>
                         </>
                     )
                 )

@@ -5,6 +5,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    background-color: #fafafa;
 }
 
 .img {
@@ -28,7 +29,8 @@
     width: 200px;
     height: 200px;
     object-fit: contain;
-    background-color: #f5f5f5;
+    background-color: #fff;
+    border-radius: 4px;
 }
 
 .button {
@@ -41,4 +43,22 @@
     color: rgb(57, 127, 234);
     margin-bottom: 10px;
     letter-spacing: -10px;
+}
+
+.description {
+    font-size: 12px;
+    color: #aaa;
+    margin-right: 10px;
+}
+
+.input {
+    height: 35px;
+    box-sizing: border-box;
+    font-size: 14px;
+    color: #666;
+    border: 1px solid #ccc;
+    outline: none;
+    border-radius: 4px;
+    padding: 0 15px;
+    text-align: center;
 }

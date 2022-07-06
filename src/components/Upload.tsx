@@ -26,8 +26,17 @@ const Upload: Component<Props> = (props) => {
             }
         }
     }
+    let $input: HTMLInputElement | undefined = void 0
     return (
-        <input type="file" onChange={handleUpload} />
+        <>
+            <button
+                onClick={() => {
+                    if (!$input) return
+                    $input.click()
+                }}
+            >UPLOAD</button>
+            <input ref={$input} type="file" onChange={handleUpload} style={{ display: 'none' }} />
+        </>
     )
 }
 
