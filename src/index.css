@@ -1,0 +1,19 @@
+body {
+    margin: 0;
+}
+
+button {
+    padding: 10px 50px;
+    background-color: rgb(57, 127, 234);
+    border: none;
+    color: #fff;
+    border-radius: 4px;
+}
+
+button:hover {
+    background-color: rgb(74, 143, 246);
+}
+
+button:active {
+    background-color: rgb(13, 95, 218);
+}

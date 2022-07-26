@@ -1,0 +1,25 @@
+{
+  "name": "vite-template-solid",
+  "version": "0.0.0",
+  "description": "",
+  "scripts": {
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "deploy": "vite build && node --loader ts-node/esm scripts/gh-pages.ts"
+  },
+  "license": "MIT",
+  "type": "module",
+  "devDependencies": {
+    "typescript": "^4.6.4",
+    "vite": "^2.9.9",
+    "vite-plugin-solid": "^2.2.6",
+    "ts-node": "^10.8.0",
+    "@types/gh-pages": "^3.2.1",
+    "gh-pages": "^4.0.0"
+  },
+  "dependencies": {
+    "solid-js": "^1.4.2"
+  }
+}
